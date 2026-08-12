@@ -18,9 +18,12 @@ export default function Hero() {
         <div className="hero-content">
           <motion.h1
             className="hero-title"
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
+            initial={{ opacity: 0, scale: 0.9, filter: "blur(10px)", y: 40 }}
+            animate={{ opacity: 1, scale: 1, filter: "blur(0px)", y: 0 }}
+            transition={{ 
+              duration: 1.4, 
+              ease: [0.2, 0.9, 0.3, 1.1] // Custom spring-like easing for a smooth premium pop
+            }}
           >
             ADITYA
             <span className="hero-title-stroke">SINGH</span>
