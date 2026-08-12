@@ -1,12 +1,38 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 export default function AnimatedBackground() {
+  const [stars, setStars] = useState([]);
+
+  useEffect(() => {
+    // Generate static stars to avoid re-rendering
+    const newStars = Array.from({ length: 80 }).map(() => ({
+      x: Math.random() * 100,
+      y: Math.random() * 100,
+      size: Math.random() * 2 + 1,
+      duration: Math.random() * 20 + 20,
+      delay: Math.random() * -40,
+      opacity: Math.random() * 0.5 + 0.1
+    }));
+    setStars(newStars);
+  }, []);
+
   return (
     <div className="animated-background">
-      <div className="bg-orb orb-1"></div>
-      <div className="bg-orb orb-2"></div>
-      <div className="bg-orb orb-3"></div>
-      
+      {stars.map((star, i) => (
+        <div
+          key={i}
+          className="star"
+          style={{
+            left: `${star.x}vw`,
+            top: `${star.y}vh`,
+            width: `${star.size}px`,
+            height: `${star.size}px`,
+            opacity: star.opacity,
+            animationDuration: `${star.duration}s`,
+            animationDelay: `${star.delay}s`,
+          }}
+        />
+      ))}
       <style>{`
         .animated-background {
           position: fixed;
@@ -16,59 +42,21 @@ export default function AnimatedBackground() {
           height: 100vh;
           z-index: -1;
           overflow: hidden;
-          background: var(--bg);
+          background: #000000;
           pointer-events: none;
         }
-        .bg-orb {
+        .star {
           position: absolute;
+          background: #ffffff;
           border-radius: 50%;
-          filter: blur(120px);
-          opacity: 0.25;
-          animation: floatOrb 20s infinite ease-in-out alternate;
-        }
-        .orb-1 {
-          width: 50vw;
-          height: 50vw;
-          max-width: 600px;
-          max-height: 600px;
-          background: var(--accent);
-          top: -10%;
-          left: -10%;
-          animation-delay: 0s;
-        }
-        .orb-2 {
-          width: 45vw;
-          height: 45vw;
-          max-width: 500px;
-          max-height: 500px;
-          background: var(--accent2);
-          bottom: 0%;
-          right: -10%;
-          animation-delay: -7s;
-        }
-        .orb-3 {
-          width: 55vw;
-          height: 55vw;
-          max-width: 700px;
-          max-height: 700px;
-          background: #3b82f6; /* Blueish to mix with gold/purple */
-          top: 30%;
-          left: 50%;
-          transform: translateX(-50%);
-          animation-delay: -14s;
-          opacity: 0.15;
+          animation: floatStar linear infinite;
         }
         
-        @keyframes floatOrb {
-          0% {
-            transform: translate(0, 0) scale(1);
-          }
-          50% {
-            transform: translate(30px, 40px) scale(1.05);
-          }
-          100% {
-            transform: translate(-30px, -20px) scale(0.95);
-          }
+        @keyframes floatStar {
+          0% { transform: translateY(0); opacity: 0; }
+          10% { opacity: var(--opacity, 0.5); }
+          90% { opacity: var(--opacity, 0.5); }
+          100% { transform: translateY(-30vh); opacity: 0; }
         }
       `}</style>
     </div>
