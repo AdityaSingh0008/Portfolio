@@ -62,7 +62,7 @@ export default function About() {
           display: grid;
           grid-template-columns: 0.8fr 1.2fr;
           gap: 60px;
-          align-items: center;
+          align-items: flex-start;
         }
         .about-photo-wrapper {
           position: relative;
