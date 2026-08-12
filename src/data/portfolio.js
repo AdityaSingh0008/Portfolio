@@ -68,6 +68,8 @@ export const projects = [
     tags: ["React.js", "Node.js", "Express", "MongoDB", "JWT Auth", "Vercel"],
     link: "https://github.com/AdityaSingh0008",
     linkLabel: "GitHub ↗",
+    secondaryLink: "https://lms-frontend-puce-tau.vercel.app/",
+    secondaryLabel: "🚀 Live Demo ↗",
   },
   {
     icon: "🍔",
@@ -77,6 +79,8 @@ export const projects = [
     tags: ["React.js", "Tailwind CSS", "Node.js", "MongoDB", "Leaflet"],
     link: "https://github.com/AdityaSingh0008",
     linkLabel: "GitHub ↗",
+    secondaryLink: "https://swiggy-frontend-sigma.vercel.app/",
+    secondaryLabel: "🚀 Live Demo ↗",
   },
   {
     icon: "🎬",
@@ -86,6 +90,8 @@ export const projects = [
     tags: ["React.js", "TMDb API", "Infinite Scrolling", "JavaScript"],
     link: "https://github.com/AdityaSingh0008",
     linkLabel: "GitHub ↗",
+    secondaryLink: "https://moviesphere-dun.vercel.app/",
+    secondaryLabel: "🚀 Live Demo ↗",
   },
   {
     icon: "🎵",
