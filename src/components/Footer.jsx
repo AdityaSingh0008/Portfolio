@@ -1,12 +1,6 @@
 import { profile, projects } from "../data/portfolio";
 
-const quickLinks = [
-  { icon: "📸", href: projects[0].link },
-  { icon: "🚗", href: projects[1].link },
-  { icon: "🎵", href: projects[2].link },
-  { icon: "⏱", href: projects[3].link },
-  { icon: "🎧", href: projects[4].link },
-];
+const quickLinks = projects.map(p => ({ icon: p.icon, href: p.link }));
 
 export default function Footer() {
   return (
