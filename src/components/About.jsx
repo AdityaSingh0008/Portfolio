@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import Reveal from "./Reveal";
 import { profile } from "../data/portfolio";
-import profilePhoto from "../assets/aditya_dark.png";
+const profilePhoto = "/aditya-singh-professional.jpg";
 
 export default function About() {
   return (
@@ -19,7 +19,7 @@ export default function About() {
             <div className="about-photo-wrapper">
               <img 
                 src={profilePhoto} 
-                alt="Aditya Singh" 
+                alt="Aditya Singh - Software Developer and UX/UI Designer" 
                 className="about-photo"
               />
               <div className="about-photo-glow" />
