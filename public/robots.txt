@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://portfolio-nine-gilt-19.vercel.app/sitemap.xml

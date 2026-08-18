@@ -35,7 +35,7 @@ export default function Hero() {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.3 }}
           >
-            UX/UI DESIGNER <span className="bullet">•</span> FULL STACK DEVELOPER <span className="bullet">•</span> DATA ANALYST
+            SOFTWARE DEVELOPER & UX/UI DESIGNER <span className="bullet">|</span> B.TECH CSE <span className="bullet">|</span> K.R. MANGALAM UNIVERSITY
           </motion.div>
 
           <motion.div
