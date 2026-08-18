@@ -38,8 +38,6 @@ export default function Navbar() {
         <div className="navbar-inner">
           <a href="#" className="logo">
             <span className="logo-as">AS</span>
-            <span className="logo-dot">.</span>
-            <span className="logo-dev">DEV</span>
           </a>
 
           <nav className="nav-links desktop-only">
@@ -105,17 +103,18 @@ export default function Navbar() {
           padding: 0 24px;
         }
         .navbar {
-          background: rgba(15, 15, 15, 0.4);
-          border: 1px solid rgba(255, 255, 255, 0.05);
-          backdrop-filter: blur(16px);
+          background: rgba(255, 255, 255, 0.03);
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          backdrop-filter: blur(20px);
+          -webkit-backdrop-filter: blur(20px);
           border-radius: 999px;
           width: 100%;
           max-width: 900px;
           transition: all 0.3s ease;
         }
         .navbar.scrolled {
-          background: rgba(10, 10, 10, 0.85);
-          border: 1px solid rgba(255, 255, 255, 0.1);
+          background: rgba(255, 255, 255, 0.06);
+          border: 1px solid rgba(255, 255, 255, 0.15);
           box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);
         }
         .navbar-inner {
