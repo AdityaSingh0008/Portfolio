@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import Reveal from "./Reveal";
 import { profile } from "../data/portfolio";
-const profilePhoto = "/aditya-singh-professional.jpg";
+const profilePhoto = "/aditya-singh-professional.png";
 
 export default function About() {
   return (
