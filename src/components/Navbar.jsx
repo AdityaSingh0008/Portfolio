@@ -27,69 +27,97 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // Prevent scrolling when mobile menu is open
+  useEffect(() => {
+    if (open) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+  }, [open]);
+
   return (
-    <div className="navbar-wrapper">
-      <motion.header
-        className={`navbar ${scrolled ? "scrolled" : ""}`}
-        initial={{ y: -80, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
-      >
-        <div className="navbar-inner">
-          <a href="#" className="logo">
-            <span className="logo-as">AS</span>
-          </a>
-
-          <nav className="nav-links desktop-only">
-            <a 
-              href="#" 
-              className={active === 'home' ? 'active' : ''}
-              onClick={() => setActive('home')}
-            >
-              HOME
+    <>
+      <div className="navbar-wrapper">
+        <motion.header
+          className={`navbar ${scrolled ? "scrolled" : ""}`}
+          initial={{ y: -80, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+        >
+          <div className="navbar-inner">
+            <a href="#" className="logo">
+              <span className="logo-as">AS</span>
             </a>
-            {navLinks.map((l) => (
+
+            <nav className="nav-links desktop-only">
               <a 
-                key={l.id} 
-                href={`#${l.id}`}
-                className={active === l.id ? 'active' : ''}
-                onClick={() => setActive(l.id)}
+                href="#" 
+                className={active === 'home' ? 'active' : ''}
+                onClick={() => setActive('home')}
               >
-                {l.label.toUpperCase()}
+                HOME
               </a>
-            ))}
-          </nav>
-
-          <button
-            className="menu-toggle mobile-only"
-            onClick={() => setOpen((o) => !o)}
-            aria-label="Toggle menu"
-          >
-            <span className={open ? "bar bar1 open" : "bar bar1"} />
-            <span className={open ? "bar bar2 open" : "bar bar2"} />
-            <span className={open ? "bar bar3 open" : "bar bar3"} />
-          </button>
-        </div>
-
-        <AnimatePresence>
-          {open && (
-            <motion.div
-              className="mobile-menu"
-              initial={{ height: 0, opacity: 0 }}
-              animate={{ height: "auto", opacity: 1 }}
-              exit={{ height: 0, opacity: 0 }}
-              transition={{ duration: 0.3 }}
-            >
-              <a href="#" onClick={() => { setOpen(false); setActive('home'); }}>HOME</a>
               {navLinks.map((l) => (
-                <a key={l.id} href={`#${l.id}`} onClick={() => { setOpen(false); setActive(l.id); }}>
+                <a 
+                  key={l.id} 
+                  href={`#${l.id}`}
+                  className={active === l.id ? 'active' : ''}
+                  onClick={() => setActive(l.id)}
+                >
                   {l.label.toUpperCase()}
                 </a>
               ))}
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </motion.header>
+            </nav>
+
+            <button
+              className="menu-toggle mobile-only"
+              onClick={() => setOpen((o) => !o)}
+              aria-label="Toggle menu"
+            >
+              <span className={open ? "bar bar1 open" : "bar bar1"} />
+              <span className={open ? "bar bar2 open" : "bar bar2"} />
+              <span className={open ? "bar bar3 open" : "bar bar3"} />
+            </button>
+          </div>
+        </motion.header>
+      </div>
+
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            className="mobile-overlay"
+            initial={{ opacity: 0, backdropFilter: "blur(0px)" }}
+            animate={{ opacity: 1, backdropFilter: "blur(20px)" }}
+            exit={{ opacity: 0, backdropFilter: "blur(0px)" }}
+            transition={{ duration: 0.4 }}
+          >
+            <div className="mobile-overlay-content">
+              <motion.a 
+                href="#" 
+                onClick={() => { setOpen(false); setActive('home'); }}
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 0.1 }}
+              >
+                HOME
+              </motion.a>
+              {navLinks.map((l, i) => (
+                <motion.a 
+                  key={l.id} 
+                  href={`#${l.id}`} 
+                  onClick={() => { setOpen(false); setActive(l.id); }}
+                  initial={{ y: 20, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ delay: 0.1 + ((i + 1) * 0.05) }}
+                >
+                  {l.label.toUpperCase()}
+                </motion.a>
+              ))}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       <style>{`
         .navbar-wrapper {
@@ -129,10 +157,10 @@ export default function Navbar() {
           letter-spacing: 2px;
           display: flex;
           align-items: center;
+          position: relative;
+          z-index: 101; /* Above mobile overlay so logo stays visible */
         }
         .logo-as { color: var(--accent); }
-        .logo-dot { color: #ffffff; opacity: 0.5; margin: 0 2px; }
-        .logo-dev { color: #888888; }
         
         .nav-links {
           display: flex;
@@ -158,31 +186,56 @@ export default function Navbar() {
           box-shadow: 0 0 8px var(--accent);
         }
         
-        .mobile-only { display: none; }
         .menu-toggle {
           width: 28px; height: 18px;
-          display: flex; flex-direction: column; justify-content: space-between;
+          display: none; /* Hidden by default on desktop */
+          flex-direction: column; 
+          justify-content: space-between;
+          position: relative;
+          z-index: 101; /* Above mobile overlay so button is clickable to close */
+          background: transparent;
+          border: none;
+          cursor: pointer;
         }
         .bar { width: 100%; height: 1.5px; background: #ffffff; transition: all 0.3s ease; }
         .bar1.open { transform: translateY(8px) rotate(45deg); }
         .bar2.open { opacity: 0; }
         .bar3.open { transform: translateY(-8px) rotate(-45deg); }
         
-        .mobile-menu {
-          overflow: hidden;
+        .mobile-overlay {
+          position: fixed;
+          inset: 0;
+          width: 100vw;
+          height: 100vh;
+          background: rgba(0, 0, 0, 0.85);
+          z-index: 99;
           display: flex;
           flex-direction: column;
-          gap: 16px;
-          padding: 0 28px 20px;
+          justify-content: center;
+          align-items: center;
         }
-        .mobile-menu a { font-size: 13px; font-weight: 600; letter-spacing: 2px; color: #888888; }
-        .mobile-menu a:hover { color: #ffffff; }
+        .mobile-overlay-content {
+          display: flex;
+          flex-direction: column;
+          gap: 32px;
+          text-align: center;
+        }
+        .mobile-overlay-content a { 
+          font-size: 24px; 
+          font-weight: 800; 
+          letter-spacing: 4px; 
+          color: #888888; 
+          text-transform: uppercase;
+          transition: color 0.3s ease;
+        }
+        .mobile-overlay-content a:hover,
+        .mobile-overlay-content a:active { color: #ffffff; }
 
         @media (max-width: 860px) {
-          .desktop-only { display: none; }
-          .mobile-only { display: flex; }
+          .desktop-only { display: none !important; }
+          .menu-toggle.mobile-only { display: flex; }
         }
       `}</style>
-    </div>
+    </>
   );
 }
