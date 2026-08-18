@@ -12,21 +12,48 @@ const infoItems = [
 ];
 
 export default function Contact() {
-  const [sent, setSent] = useState(false);
+  const [status, setStatus] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [form, setForm] = useState({ first: "", last: "", email: "", subject: "", message: "" });
 
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const body = encodeURIComponent(
-      `${form.message}\n\n— ${form.first} ${form.last} (${form.email})`
-    );
-    window.location.href = `mailto:${profile.email}?subject=${encodeURIComponent(
-      form.subject || "Portfolio Contact"
-    )}&body=${body}`;
-    setSent(true);
-    setTimeout(() => setSent(false), 4000);
+    setIsSubmitting(true);
+    setStatus("");
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          access_key: "3ae479ee-2b40-4f07-9e46-efaa41c930d2",
+          name: `${form.first} ${form.last}`,
+          email: form.email,
+          subject: form.subject || "New Contact Form Message – Portfolio",
+          message: form.message,
+          from_name: "Portfolio Contact Form"
+        }),
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        setStatus("success");
+        setForm({ first: "", last: "", email: "", subject: "", message: "" });
+      } else {
+        setStatus("error");
+      }
+    } catch (error) {
+      setStatus("error");
+    } finally {
+      setIsSubmitting(false);
+      setTimeout(() => setStatus(""), 5000);
+    }
   };
 
   return (
@@ -70,17 +97,28 @@ export default function Contact() {
               type="submit"
               className="btn btn-primary"
               whileTap={{ scale: 0.96 }}
+              disabled={isSubmitting}
             >
-              Send Message ✦
+              {isSubmitting ? "Sending..." : "Send Message ✦"}
             </motion.button>
 
-            {sent && (
+            {status === "success" && (
               <motion.div
-                className="sent-msg"
+                className="sent-msg success"
                 initial={{ opacity: 0, y: 8 }}
                 animate={{ opacity: 1, y: 0 }}
               >
-                ✅ Opening your email client...
+                ✅ Message sent successfully!
+              </motion.div>
+            )}
+
+            {status === "error" && (
+              <motion.div
+                className="sent-msg error"
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+              >
+                ❌ Failed to send message. Please try again.
               </motion.div>
             )}
           </form>
@@ -136,7 +174,10 @@ export default function Contact() {
           border-color: var(--accent);
         }
         .contact-form .btn { justify-content: center; margin-top: 6px; }
-        .sent-msg { font-size: 14px; color: #4ade80; text-align: center; }
+        .btn:disabled { opacity: 0.7; cursor: not-allowed; }
+        .sent-msg { font-size: 14px; text-align: center; margin-top: 8px; font-weight: 500; }
+        .sent-msg.success { color: #4ade80; }
+        .sent-msg.error { color: #ef4444; }
 
         @media (max-width: 860px) {
           .contact-grid { grid-template-columns: 1fr; gap: 40px; }
