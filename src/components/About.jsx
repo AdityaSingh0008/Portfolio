@@ -55,7 +55,7 @@ export default function About() {
           display: grid;
           grid-template-columns: 0.8fr 1.2fr;
           gap: 60px;
-          align-items: flex-start;
+          align-items: center;
         }
         .about-photo-wrapper {
           position: relative;
@@ -73,10 +73,9 @@ export default function About() {
           box-shadow: 0 0 40px rgba(0,0,0,0.8);
           position: relative;
           z-index: 2;
-          filter: grayscale(20%);
-          transition: filter 0.3s ease;
+          transition: transform 0.3s ease;
         }
-        .about-photo:hover { filter: grayscale(0%); }
+        .about-photo:hover { transform: scale(1.02); }
         .about-photo-glow {
           position: absolute;
           width: 300px; height: 300px;
