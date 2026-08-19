@@ -55,13 +55,14 @@ export default function About() {
           display: grid;
           grid-template-columns: 0.8fr 1.2fr;
           gap: 60px;
-          align-items: center;
+          align-items: flex-start;
         }
         .about-photo-wrapper {
           position: relative;
           display: flex;
           justify-content: center;
           align-items: center;
+          margin-top: 60px;
         }
         .about-photo {
           width: 100%;
