@@ -44,19 +44,71 @@ export const experience = [
   },
 ];
 
-export const skills = [
-  { icon: "⚛️", label: "React.js" },
-  { icon: "🟢", label: "Node.js & Express" },
-  { icon: "🍃", label: "MongoDB" },
-  { icon: "⚡", label: "JavaScript (ES6+)" },
-  { icon: "🌊", label: "Tailwind CSS" },
-  { icon: "🛠️", label: "REST APIs & JWT" },
-  { icon: "🐳", label: "Docker & CI/CD" },
-  { icon: "🗄️", label: "SQL & MySQL" },
-  { icon: "☕", label: "Java & C++" },
-  { icon: "🎨", label: "UX/UI Design" },
-  { icon: "📐", label: "Figma" },
-  { icon: "🔍", label: "User Research" },
+export const skillCategories = [
+  {
+    title: "Languages",
+    items: [
+      { icon: "💻", label: "C++" },
+      { icon: "☕", label: "Java" },
+      { icon: "🐍", label: "Python" },
+      { icon: "⚡", label: "JavaScript (ES6+)" },
+      { icon: "🌐", label: "HTML5 & CSS3" },
+      { icon: "🗄️", label: "SQL" }
+    ]
+  },
+  {
+    title: "Frameworks & Libraries",
+    items: [
+      { icon: "⚛️", label: "React.js" },
+      { icon: "🟢", label: "Node.js" },
+      { icon: "🚂", label: "Express.js" },
+      { icon: "🔌", label: "REST APIs" },
+      { icon: "🔌", label: "Socket.io" },
+      { icon: "⚡", label: "Vanilla JS" }
+    ]
+  },
+  {
+    title: "Databases & DevOps",
+    items: [
+      { icon: "🍃", label: "MongoDB" },
+      { icon: "🐬", label: "MySQL" },
+      { icon: "⚡", label: "Supabase" },
+      { icon: "🐳", label: "Docker" },
+      { icon: "🚀", label: "Apache Kafka" },
+      { icon: "⚙️", label: "CI/CD" }
+    ]
+  },
+  {
+    title: "Cloud & Tools",
+    items: [
+      { icon: "☁️", label: "Vercel & Render" },
+      { icon: "🌐", label: "Netlify & Railway" },
+      { icon: "📦", label: "MongoDB Atlas & Cloudinary" },
+      { icon: "🛠️", label: "Git & GitHub" },
+      { icon: "💻", label: "VS Code" },
+      { icon: "📮", label: "Postman" }
+    ]
+  },
+  {
+    title: "CS Fundamentals",
+    items: [
+      { icon: "🧠", label: "Data Structures & Algorithms" },
+      { icon: "🏗️", label: "OOP" },
+      { icon: "🗃️", label: "DBMS" },
+      { icon: "🖥️", label: "Operating Systems" },
+      { icon: "🌐", label: "Computer Networks" }
+    ]
+  },
+  {
+    title: "Design & Research",
+    items: [
+      { icon: "📐", label: "Figma" },
+      { icon: "✏️", label: "Wireframing" },
+      { icon: "✨", label: "Prototyping" },
+      { icon: "🔍", label: "Heuristic Evaluation" },
+      { icon: "👥", label: "Usability Testing" }
+    ]
+  }
 ];
 
 export const projects = [

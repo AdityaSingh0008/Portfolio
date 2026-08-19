@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import Reveal from "./Reveal";
-import { skills } from "../data/portfolio";
+import { skillCategories } from "../data/portfolio";
 
 export default function Skills() {
   return (
@@ -14,28 +14,50 @@ export default function Skills() {
           </p>
         </Reveal>
 
-        <div className="skills-grid">
-          {skills.map((s, i) => (
-            <motion.div
-              className="skill-card"
-              key={s.label}
-              initial={{ opacity: 0, scale: 0.85 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true, amount: 0.4 }}
-              transition={{ duration: 0.4, delay: (i % 6) * 0.06 }}
-              whileHover={{ y: -8, scale: 1.05 }}
-            >
-              <span className="skill-icon">{s.icon}</span>
-              <span className="skill-label">{s.label}</span>
-            </motion.div>
+        <div className="skills-container">
+          {skillCategories.map((category, catIndex) => (
+            <div key={category.title} className="skill-category">
+              <Reveal delay={0.1}>
+                <h3 className="category-title">{category.title}</h3>
+              </Reveal>
+              <div className="skills-grid">
+                {category.items.map((s, i) => (
+                  <motion.div
+                    className="skill-card"
+                    key={s.label}
+                    initial={{ opacity: 0, scale: 0.85 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true, amount: 0.4 }}
+                    transition={{ duration: 0.4, delay: (i % 6) * 0.06 }}
+                    whileHover={{ y: -8, scale: 1.05 }}
+                  >
+                    <span className="skill-icon">{s.icon}</span>
+                    <span className="skill-label">{s.label}</span>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
           ))}
         </div>
       </div>
 
       <style>{`
+        .skills-container {
+          display: flex;
+          flex-direction: column;
+          gap: 40px;
+        }
+        .category-title {
+          font-size: 14px;
+          color: var(--accent);
+          text-transform: uppercase;
+          letter-spacing: 1.5px;
+          margin-bottom: 20px;
+          font-weight: 700;
+        }
         .skills-grid {
           display: grid;
-          grid-template-columns: repeat(6, 1fr);
+          grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
           gap: 16px;
         }
         .skill-card {
@@ -59,7 +81,7 @@ export default function Skills() {
         .skill-label { font-size: 13px; color: var(--text-dim); font-weight: 500; }
 
         @media (max-width: 900px) {
-          .skills-grid { grid-template-columns: repeat(3, 1fr); }
+          .skills-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
         }
         @media (max-width: 480px) {
           .skills-grid { grid-template-columns: repeat(2, 1fr); }
