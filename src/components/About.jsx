@@ -31,6 +31,7 @@ export default function About() {
               <p className="about-p">{profile.bio1}</p>
               <p className="about-p">{profile.bio2}</p>
               <p className="about-p">{profile.bio3}</p>
+              <p className="about-p">{profile.bio4}</p>
               <div className="about-location pill">📍 K.R. Mangalam University</div>
             </Reveal>
 
