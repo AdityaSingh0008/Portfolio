@@ -121,7 +121,7 @@ export const projects = [
     link: "https://github.com/AdityaSingh0008",
     linkLabel: "GitHub ↗",
     secondaryLink: "https://lms-frontend-puce-tau.vercel.app/",
-    secondaryLabel: "🚀 Live Demo ↗",
+    secondaryLabel: "View Live ↗",
   },
   {
     icon: "🍔",
@@ -132,7 +132,7 @@ export const projects = [
     link: "https://github.com/AdityaSingh0008",
     linkLabel: "GitHub ↗",
     secondaryLink: "https://swiggy-frontend-sigma.vercel.app/",
-    secondaryLabel: "🚀 Live Demo ↗",
+    secondaryLabel: "View Live ↗",
   },
   {
     icon: "🎬",
@@ -143,7 +143,7 @@ export const projects = [
     link: "https://github.com/AdityaSingh0008",
     linkLabel: "GitHub ↗",
     secondaryLink: "https://moviesphere-dun.vercel.app/",
-    secondaryLabel: "🚀 Live Demo ↗",
+    secondaryLabel: "View Live ↗",
   },
   {
     icon: "🎵",
