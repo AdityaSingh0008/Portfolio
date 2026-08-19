@@ -7,13 +7,6 @@ export default function About() {
   return (
     <section className="section about" id="about">
       <div className="container">
-        <Reveal>
-          <div className="section-header-center">
-            <span className="section-tag">About Me</span>
-            <h2 className="section-title">The Mind Behind the Design</h2>
-          </div>
-        </Reveal>
-
         <div className="about-grid">
           <Reveal delay={0.1}>
             <div className="about-photo-wrapper">
@@ -28,6 +21,9 @@ export default function About() {
 
           <div className="about-content">
             <Reveal delay={0.2}>
+              <span className="section-tag">About Me</span>
+              <h2 className="section-title">The Mind Behind the Design</h2>
+              <br />
               <p className="about-p">{profile.bio1}</p>
               <p className="about-p">{profile.bio2}</p>
               <p className="about-p">{profile.bio3}</p>
@@ -55,10 +51,6 @@ export default function About() {
       </div>
 
       <style>{`
-        .section-header-center {
-          text-align: center;
-          margin-bottom: 60px;
-        }
         .about-grid {
           display: grid;
           grid-template-columns: 0.8fr 1.2fr;
